@@ -42,7 +42,9 @@ Each transaction from a client is associated with a TRAN CODE. Below are the tra
 
 Blow is the anatomy representation of each trancodes:
 
-Example Trancode: <b>2110</b>
+Example Trancode: <b>2110</b>, is broken down to 3 parts. Which are the TXCODE ID,Transfer Mode and Account Entry Type. 
+
+Below are the descriptons of each of the parts of the Trancode. 
 
 <table style="text-align:left">
 <tr><td><b>TXCODE ID</b></td><td>2</td><td>Identifier to distinguish a specific transaction</td></tr>
