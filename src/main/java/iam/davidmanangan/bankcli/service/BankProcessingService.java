@@ -4,6 +4,6 @@ import iam.davidmanangan.bankcli.model.BankTransaction;
 
 public interface BankProcessingService {
 	
-	public void processTransaction(BankTransaction bankTransaction);
+	public Double processTransaction(BankTransaction bankTransaction);
 
 }

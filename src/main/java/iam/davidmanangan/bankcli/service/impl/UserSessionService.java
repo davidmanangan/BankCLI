@@ -1,6 +1,7 @@
 package iam.davidmanangan.bankcli.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,17 @@ public class UserSessionService {
 		}
 		
 		userSessionRepository.saveAndFlush(new UserSession(loginUser,new Date()));
+	}
+	
+	public UserSession getCurrentUser() {
+		
+		List<UserSession> userSessions = userSessionRepository.findAll();
+		if(userSessions != null && userSessions.size() > 0) {
+			
+			return userSessions.get(userSessions.size() - 1);
+			
+		}
+		return null;
 	}
 	
 }
