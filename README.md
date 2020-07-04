@@ -55,4 +55,14 @@ An Accounting Entry of 11 means that the TX is a debit transaction</td></tr>
 </tr>
 </table>
 
+#### Bank Accounting Ledgers
+The Bank CLI uses this Transactions as Entries in the Account Ledger. The Bank CLI maintains two ledgers, which are the Account Ledger and the Loan Ledger.
+
+<b>Account Ledger</b> - stores all monetary transactions
+<br/>
+<b>Loan Ledger</b> - stores all loans associated with the accounts 
+
+Note: <b>Account Balance</b> is computed base on the transactions in the Account Ledger and the Loan Ledger.
+
+
 
