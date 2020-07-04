@@ -22,9 +22,6 @@ public class PayCommand {
 	@Autowired
 	AccountingEntryService accountingEntryService;
 	
-	@Autowired
-	UserSessionRepository userSessionRepository;
-	
 	@ShellMethod("Send Payment to another account")
 	public void pay(@ShellOption String username, @ShellOption String amount) {
 		

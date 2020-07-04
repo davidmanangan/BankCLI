@@ -12,18 +12,19 @@ import iam.davidmanangan.bankcli.model.UserSession;
 import iam.davidmanangan.bankcli.repository.UserSessionRepository;
 import iam.davidmanangan.bankcli.service.impl.AccountBalanceInquiryService;
 import iam.davidmanangan.bankcli.service.impl.AccountingEntryService;
+import iam.davidmanangan.bankcli.service.impl.UserSessionService;
 
 @ShellComponent
 public class TopUpCommand {
-
+	
+	@Autowired
+	UserSessionService userSessionService;
+	
 	@Autowired
 	AccountBalanceInquiryService accountBalanceInquiryService;
 	
 	@Autowired
 	AccountingEntryService accountingEntryService;
-	
-	@Autowired
-	UserSessionRepository userSessionRepository;
 	
 	@ShellMethod("Top up account balance")
 	public void topup(@ShellOption String amount) {
@@ -39,9 +40,7 @@ public class TopUpCommand {
 		/**
 		 * GET USER THAT IS CURRENTLY LOGGED IN
 		 */
-		List<UserSession> userSessions = userSessionRepository.findAll();
-		
-		UserSession currentLoggedInUser = userSessions.get(userSessions.size() - 1);
+		UserSession currentLoggedInUser = userSessionService.getCurrentUser(); 
 		
 		accountBalanceInquiryService.processTransaction(new BankTransaction(transactionGroup,amount,currentLoggedInUser.getUserName()));
 		

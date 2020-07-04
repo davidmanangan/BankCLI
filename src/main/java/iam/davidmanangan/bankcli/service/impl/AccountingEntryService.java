@@ -20,8 +20,8 @@ import iam.davidmanangan.bankcli.service.BankProcessingService;
 public class AccountingEntryService implements BankProcessingService{
 
 	@Autowired
-	UserSessionRepository userSessionRepository;
-
+	UserSessionService userSessionService;
+	
 	@Autowired
 	AccountTransactionRepository accountTransactionRepository;
 	
@@ -29,13 +29,12 @@ public class AccountingEntryService implements BankProcessingService{
 	JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void processTransaction(BankTransaction bankTransaction) {
+	public Double processTransaction(BankTransaction bankTransaction) {
 
 		/**
 		 * GET USER THAT IS CURRENTLY LOGGED IN
 		 */
-		List<UserSession> userSessions = userSessionRepository.findAll();
-		UserSession currentLoggedInUser = userSessions.get(userSessions.size() - 1);
+		UserSession currentLoggedInUser = userSessionService.getCurrentUser();
 
 		/**
 		 * GET TRANCODE IN DATABASE 
@@ -107,6 +106,8 @@ public class AccountingEntryService implements BankProcessingService{
 			
 			}
 		}
+		
+		return new BigDecimal(bankTransaction.getAmount()).doubleValue();
 		
 		
 	}

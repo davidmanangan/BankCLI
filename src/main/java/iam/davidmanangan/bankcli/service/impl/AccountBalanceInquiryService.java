@@ -20,7 +20,7 @@ import iam.davidmanangan.bankcli.service.BankProcessingService;
 public class AccountBalanceInquiryService implements BankProcessingService{
 
 	@Autowired
-	UserSessionRepository userSessionRepository;
+	UserSessionService userSessionService;
 	
 	@Autowired
 	LoanLedgerService loanLedgerService;
@@ -32,16 +32,10 @@ public class AccountBalanceInquiryService implements BankProcessingService{
 	JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public void processTransaction(BankTransaction bankTransaction) {
+	public Double processTransaction(BankTransaction bankTransaction) {
 		
-		List<UserSession> userSessions = userSessionRepository.findAll();
-		
-		UserSession currentLoggedInUser = null; 
-		if(userSessions != null && userSessions.size() > 0) {
-			
-			currentLoggedInUser = userSessions.get(userSessions.size() - 1);
-			
-		}
+		UserSession currentLoggedInUser = userSessionService.getCurrentUser(); 
+
 		
 		List<BigDecimal> creditTransactions = jdbcTemplate.query(
 				String.format("SELECT SUM(AMOUNT) FROM BANK_ACCOUNT_TRANSACTIONS WHERE ACCOUNT_USERNAME='%s' AND ACCOUNT_ENTRY_TYPE = 10", 
@@ -318,18 +312,13 @@ public class AccountBalanceInquiryService implements BankProcessingService{
 		
 		System.out.println();
 		
+		return totalBalance.doubleValue();
+		
 	}
 	
 	private void payLoanByTopup(BankTransaction bankTransaction) {
 		
-		List<UserSession> userSessions = userSessionRepository.findAll();
-		
-		UserSession currentLoggedInUser = null; 
-		if(userSessions != null && userSessions.size() > 0) {
-			
-			currentLoggedInUser = userSessions.get(userSessions.size() - 1);
-			
-		}
+		UserSession currentLoggedInUser = userSessionService.getCurrentUser(); 
 		
 		/*
 		 * If TRANSFER MODE IS 0 (TOPUP), add to loan ledger with a negative amount
