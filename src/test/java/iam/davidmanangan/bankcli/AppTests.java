@@ -28,46 +28,47 @@ import iam.davidmanangan.bankcli.service.impl.LoanLedgerService;
 import iam.davidmanangan.bankcli.service.impl.UserSessionService;
 
 @RunWith(SpringRunner.class)
-//@ContextConfiguration(classes = { 
-//		SpringShellConfig.class, 
-//		AccountBalanceInquiryService.class,
-//		AccountingEntryService.class, 
-//		LoanLedgerService.class, 
-//		UserSessionService.class,
-//		AccountTransactionRepository.class,
-//		LoanLedgerRepository.class,
-//		UserRepository.class,
-//		UserSessionRepository.class
-//		})
-@EnableAutoConfiguration(exclude = { 
-		JndiConnectionFactoryAutoConfiguration.class, 
-		DataSourceAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class, 
-		JpaRepositoriesAutoConfiguration.class,
-		DataSourceTransactionManagerAutoConfiguration.class })
+@ContextConfiguration(classes = { 
+		SpringShellConfig.class, 
+		AccountBalanceInquiryService.class,
+		AccountingEntryService.class, 
+		LoanLedgerService.class, 
+		UserSessionService.class,
+		AccountTransactionRepository.class,
+		LoanLedgerRepository.class,
+		UserRepository.class,
+		UserSessionRepository.class
+		})
+@EnableAutoConfiguration
+//		(exclude = { 
+//		JndiConnectionFactoryAutoConfiguration.class, 
+//		DataSourceAutoConfiguration.class,
+//		HibernateJpaAutoConfiguration.class, 
+//		JpaRepositoriesAutoConfiguration.class,
+//		DataSourceTransactionManagerAutoConfiguration.class })
 @TestExecutionListeners(value = { DependencyInjectionTestExecutionListener.class })
 @Sql(executionPhase = ExecutionPhase.BEFORE_TEST_METHOD, scripts = { "classpath:/schema-h2.sql",
 		"classpath:/data-h2.sql" })
 public class AppTests {
 
-//	@Autowired
-//	AccountBalanceInquiryService accountBalanceInquiryService;
-//
-//	@Autowired
-//	UserSessionService userSessionService;
+	@Autowired
+	AccountBalanceInquiryService accountBalanceInquiryService;
+
+	@Autowired
+	UserSessionService userSessionService;
 
 	@Test
 	public void login() {
 
-//		String username = "alice";
-//
-//		String loginUser = username.toLowerCase();
-//
-//		userSessionService.logUserSession(username);
-//
-//		System.out.println(String.format("Hi, %s", username));
-//
-//		accountBalanceInquiryService.processTransaction(new BankTransaction(0, "", loginUser));
+		String username = "alice";
+
+		String loginUser = username.toLowerCase();
+
+		userSessionService.logUserSession(username);
+
+		System.out.println(String.format("Hi, %s", username));
+
+		accountBalanceInquiryService.processTransaction(new BankTransaction(0, "", loginUser));
 
 	}
 
