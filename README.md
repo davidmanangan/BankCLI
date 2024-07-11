@@ -12,7 +12,7 @@ Develop command line interface (CLI) to simulate interaction with a retail bank.
 
 # Installation
 
-1. Unzip BankCLI_DAVID_MANANGAN.zip
+1. Clonse this repository
 2. Open a Command Prompt or Terminal
 3. Go inside the project directory, `BankCLI`
 4. Run `java -jar target/BankCLI-0.0.1-SNAPSHOT.jar` 
