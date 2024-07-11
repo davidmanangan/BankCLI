@@ -1,4 +1,6 @@
-## BANK CLI - Completed by David Manangan
+## BANK CLI
+
+A personal practice project that uses Spring Shell
 
 # Objective
 
